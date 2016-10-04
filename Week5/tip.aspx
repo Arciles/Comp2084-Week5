@@ -7,15 +7,26 @@
     <div class="form-group">
         <label for="txtAmount" class="control-label col-sm-2">Amount:</label>
         <asp:TextBox ID="txtAmount" runat="server" />
+           <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server"
+                ErrorMessage="Required" ControlToValidate="txtAmount" CssClass="alert-danger" Display="Dynamic">
+           </asp:RequiredFieldValidator>
+        <asp:RangeValidator ID="RangeValidator1" runat="server" 
+            ErrorMessage="Invalid Input" ControlToValidate="txtAmount" CssClass="alert-danger" 
+            MaximumValue="99999" MinimumValue="0.01" Type="Currency" Display="Dynamic">
 
+        </asp:RangeValidator>
     </div>
     <div class="form-group">
         <label for="ddlPercent" class="control-label col-sm-2">Tip %</label>
         <asp:DropDownList ID="ddlPercent" runat="server">
+            <asp:ListItem Value="-1" Text="-Choose-" />
             <asp:ListItem Value=".1" Text="10%" />
             <asp:ListItem Value=".15" Text="15%" />
             <asp:ListItem Value=".2" Text="20%" />
         </asp:DropDownList>
+    <asp:RangeValidator ID="RangeValidator2" runat="server" 
+        ErrorMessage="Choose a tip %" CssClass="alert-danger" Type="Double"
+         MinimumValue="0" MaximumValue="999" ControlToValidate="ddlPercent"></asp:RangeValidator>
     </div>
     <asp:Button ID="btnCalculate" runat="server" Text="Calculate Tip"
         cssclass="btn btn-success col-sm-offset-2" OnClick="btnCalculate_Click" />
